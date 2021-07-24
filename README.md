@@ -2,6 +2,7 @@
 
 ## Description:
 A user interactive site to search through books.
+![screenshot](./client/public/images/homepage.JPG)
 
 Built With: 
 * React
