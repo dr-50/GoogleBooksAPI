@@ -1,8 +1,8 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
-const { typeDefs, resolvers } = require('./server/schemas');
-const {authMiddleware}=require('./server/utils/auth')
-const db = require('./server/config/connection');
+const { typeDefs, resolvers } = require('./schemas');
+const {authMiddleware}=require('./utils/auth')
+const db = require('./config/connection');
 const path = require('path')
 
 
@@ -48,10 +48,12 @@ async function startServer() {
 }
 startServer();
 
-app.use(express.static(path.join(__dirname, '../develop/client/build/index.html')))
+if(process.env.NODE_ENV === 'production'){
+app.use(express.static(path.join(__dirname, '../client/build')))
+}
 
 app.get('*', (req,res) => {
-  res.sendFile(path.join(__dirname, '../develop/client/build/index.html'))
+  res.sendFile(path.join(__dirname, '../client/build/index.html'))
 })
 
 db.once('open', ()=>{
