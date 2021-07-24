@@ -19,7 +19,7 @@ const resolvers = {
                 throw new AuthenticationError('Incorrect username or password')
             }
             const token = signToken(user);
-            return{ toekn, user }
+            return{ token, user }
         }
     }
 }
